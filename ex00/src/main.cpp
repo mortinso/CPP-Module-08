@@ -6,7 +6,7 @@
 /*   By: mortins- <mortins-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:31:08 by mortins-          #+#    #+#             */
-/*   Updated: 2024/10/26 17:57:08 by mortins-         ###   ########.fr       */
+/*   Updated: 2024/10/26 18:06:41 by mortins-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,19 @@
 #include <list>
 
 template<typename T>
-void	routine( T container ) {
-	for (int i = 0; i < 5; i++)
-		container.push_back(i);
-
+void	ft_cout( T container ) {
 	std::cout << " = { ";
 	for (typename T::iterator it = container.begin(); it != container.end(); it++)
 		std::cout << *it << ", ";
 	std::cout << "}" << std::endl;
+}
+
+template<typename T>
+void	routine( T container ) {
+	for (int i = 0; i < 5; i++)
+		container.push_back(i);
+
+	ft_cout(container);
 
 	easyfind(container, 5);
 	easyfind(container, 2);
@@ -44,5 +49,17 @@ int	main( void ) {
 		std::cout << std::endl << INVERT << "List" << RESET;
 		std::list<int> 	lst;
 		routine(lst);
+	}
+	{ // Char list test
+		std::cout << std::endl << INVERT << "Char list" << RESET;
+		std::list<char>	char_lst;
+
+		for (int i = 0; i < 5; i++)
+			char_lst.push_back(97 + i);
+
+		ft_cout(char_lst);
+
+		easyfind(char_lst, 104);
+		easyfind(char_lst, 98);
 	}
 }
