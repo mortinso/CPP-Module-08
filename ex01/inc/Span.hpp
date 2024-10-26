@@ -6,7 +6,7 @@
 /*   By: mortins- <mortins-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 18:10:27 by mortins-          #+#    #+#             */
-/*   Updated: 2024/10/26 22:36:42 by mortins-         ###   ########.fr       */
+/*   Updated: 2024/10/26 23:55:12 by mortins-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <iostream>
 # include <algorithm>
 # include <vector>
+# include <iterator>
 
 # define BOLD "\e[1m"
 # define ITALIC "\e[3m"
@@ -45,14 +46,16 @@ class Span {
 
 		// Operator overloads
 		Span &operator = ( const Span &_span );
-		int operator [] ( unsigned int n );
+		int operator [] ( unsigned int n ) const;
 
 		// Getters
 		size_t	getCap( void ) const;
+		size_t	getSize( void ) const;
 
 		// Methods
-		void			addNumber(int num);
-		//void			addRange(iterator begin, iterator end);
+		void			addNumber( int num );
+		void			addMany( size_t n );
+		void			addRange( std::vector<int>::iterator begin, std::vector<int>::iterator end );
 		unsigned int	shortestSpan( void ) const;
 		unsigned int	longestSpan( void ) const;
 
@@ -71,6 +74,13 @@ class Span {
 			public:
 				const char *what( void ) const throw();
 		};
+
+		class TooMany : public std::exception {
+			public:
+				const char *what( void ) const throw();
+		};
 };
+
+std::ostream& operator << (std::ostream &out, const Span &span);
 
 #endif

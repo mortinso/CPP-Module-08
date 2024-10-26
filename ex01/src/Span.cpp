@@ -6,7 +6,7 @@
 /*   By: mortins- <mortins-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 18:10:37 by mortins-          #+#    #+#             */
-/*   Updated: 2024/10/26 22:46:05 by mortins-         ###   ########.fr       */
+/*   Updated: 2024/10/27 00:05:37 by mortins-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,19 @@ Span& Span::operator = ( const Span &_span ) {
 	return (*this);
 }
 
-int Span::operator [] ( unsigned int index ) {
+int Span::operator [] ( unsigned int index ) const{
 	if (cap == 0 || index >= vect.max_size())
 		throw (OutOfRange());
 	return (vect[index]);
+}
+
+std::ostream& operator << (std::ostream &out, const Span &span)
+{
+	out << "Span = { ";
+	for (size_t i = 0; i < span.getSize(); i++)
+		std::cout << span[i] << ", ";
+	out << "}";
+	return out;
 }
 
 // -----------------------------------Getters-----------------------------------
@@ -66,8 +75,12 @@ size_t	Span::getCap( void ) const {
 	return (cap);
 }
 
+size_t	Span::getSize( void ) const {
+	return (vect.size());
+}
+
 // -----------------------------------Methods-----------------------------------
-void	Span::addNumber(int num) {
+void	Span::addNumber( int num ) {
 	if (vect.size() == cap)
 		throw (FullContainer());
 
@@ -75,7 +88,26 @@ void	Span::addNumber(int num) {
 	vect.push_back(num);
 }
 
-//void	addRange(iterator begin, iterator end);
+void	Span::addMany( size_t n ) {
+	if (n > (cap - vect.size()))
+		throw(TooMany());
+
+	srand(time(0));
+
+	std::vector<int>	tmp(n);
+	std::generate(tmp.begin(), tmp.end(), rand);
+
+	std::cout << "Adding " << n << " random numbers" << std::endl;
+
+	vect.insert(vect.end(), tmp.begin(), tmp.end());
+}
+
+void	Span::addRange( std::vector<int>::iterator begin, std::vector<int>::iterator end ) {
+	if (vect.size() == cap || (std::distance(begin, end)) > (long)(cap - vect.size()))
+		throw(TooMany());
+
+	vect.insert(vect.end(), begin, end);
+}
 
 unsigned int	Span::shortestSpan( void ) const {
 	if (vect.size() <= 1)
@@ -109,9 +141,13 @@ const char *Span::OutOfRange::what( void ) const throw() {
 }
 
 const char *Span::FullContainer::what( void ) const throw() {
-	return ("Object is already full");
+	return ("Can't add more");
 }
 
 const char *Span::NoSpan::what( void ) const throw() {
 	return ("Not enough numbers to calculate span (min: 2)");
+}
+
+const char *Span::TooMany::what( void ) const throw() {
+	return ("Span does not have enough space to add that many");
 }
