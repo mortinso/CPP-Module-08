@@ -8,7 +8,7 @@ INC_DIR = inc
 OBJ_DIR = .obj
 
 SRC_FILES = main.cpp
-INC_FILES = easyfind.hpp
+INC_FILES = easyfind.hpp easyfind.tpp
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 HDRS = $(addprefix $(INC_DIR)/, $(INC_FILES))
