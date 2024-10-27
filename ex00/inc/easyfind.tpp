@@ -6,7 +6,7 @@
 /*   By: mortins- <mortins-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 16:29:06 by mortins-          #+#    #+#             */
-/*   Updated: 2024/10/26 17:56:38 by mortins-         ###   ########.fr       */
+/*   Updated: 2024/10/27 23:07:42 by mortins-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ bool	easyfind( T container, int obj ) {
 	}
 
 	if (it == container.end()) {
-		std::cout << obj << ": " << RED << "NOT found" << RESET << std::endl;
+		// std::cout << obj << ": " << RED << "NOT found" << RESET << std::endl;
 		return false;
 	}
 
-	std::cout << obj << ": " << GREEN << "Found" << RESET << std::endl;
+	// std::cout << obj << ": " << GREEN << "Found" << RESET << std::endl;
 	return true;
 }
 

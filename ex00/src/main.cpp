@@ -6,7 +6,7 @@
 /*   By: mortins- <mortins-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:31:08 by mortins-          #+#    #+#             */
-/*   Updated: 2024/10/26 18:06:41 by mortins-         ###   ########.fr       */
+/*   Updated: 2024/10/27 23:09:16 by mortins-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ void	routine( T container ) {
 
 	ft_cout(container);
 
-	easyfind(container, 5);
-	easyfind(container, 2);
+	// easyfind(container, 5);
+	// easyfind(container, 2);
+	std::cout << "5: " << (easyfind(container, 5) == true ? "Found" : "Not Found") << std::endl;
+	std::cout << "4: " << (easyfind(container, 4) == true ? "Found" : "Not Found") << std::endl;
 }
 
 int	main( void ) {
